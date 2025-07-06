@@ -1,0 +1,519 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BOOKZONEBD</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@600&display=swap');
+
+/* ========== HEADER ========== */
+.animated-header {
+  background: linear-gradient(to right, #ffffff, #f0faff);
+  padding: 20px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+  animation: fadeInDown 0.8s ease-in-out;
+}
+
+.logo-animated {
+  font-family: 'Poppins', sans-serif;
+  font-size: 26px;
+  color: #3498db;
+  font-weight: bold;
+  text-shadow: 0 0 10px #3498db50;
+  animation: glow 2s infinite alternate;
+}
+
+.search-box {
+  display: flex;
+  align-items: center;
+  margin-top: 10px;
+}
+.search-box input[type="text"] {
+  padding: 8px;
+  width: 200px;
+  border: 2px solid #3498db;
+  border-radius: 5px 0 0 5px;
+  outline: none;
+}
+.search-box button {
+  padding: 10px 15px;
+  background: #3498db;
+  color: white;
+  border: none;
+  border-radius: 0 5px 5px 0;
+  cursor: pointer;
+  font-weight: bold;
+}
+.search-box button:hover {
+  background: #2c80b4;
+}
+
+@keyframes fadeInDown {
+  from {opacity: 0; transform: translateY(-30px);}
+  to {opacity: 1; transform: translateY(0px);}
+}
+
+@keyframes glow {
+  0% {text-shadow: 0 0 5px #3498db;}
+  100% {text-shadow: 0 0 15px #2980b9;}
+}
+
+/* ===== SIDEBAR ===== */
+.abswer-sidebar {
+  width: 220px;
+  position: fixed;
+  top: 80px;
+  left: 0;
+  background-color: #fff;
+  border-right: 1px solid #ddd;
+  padding: 10px 15px;
+  height: 100%;
+  overflow-y: auto;
+  box-shadow: 2px 0 10px rgba(0, 0, 0, 0.05);
+  z-index: 999;
+  transition: left 0.3s ease;
+}
+.abswer-sidebar a {
+  display: block;
+  padding: 10px;
+  color: #333;
+  text-decoration: none;
+  font-weight: 500;
+  border-radius: 4px;
+  margin-bottom: 8px;
+  transition: 0.3s;
+}
+.abswer-sidebar a:hover {
+  background-color: #3498db;
+  color: white;
+}
+
+/* ===== MOBILE MENU TOGGLE ===== */
+.sidebar-toggle-btn {
+  display: none;
+  position: fixed;
+  top: 15px;
+  left: 15px;
+  background: #3498db;
+  color: white;
+  padding: 8px 12px;
+  border: none;
+  z-index: 1001;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+@media screen and (max-width: 768px) {
+  .animated-header {
+    flex-direction: column;
+    align-items: center;
+  }
+  .search-box {
+    margin-top: 10px;
+  }
+  .abswer-sidebar {
+    left: -260px;
+  }
+  .abswer-sidebar.active {
+    left: 0;
+  }
+  .sidebar-toggle-btn {
+    display: block;
+  }
+}
+
+/* ===== PAGE SECTION SCROLLABLE BAR ===== */
+.page-section {
+  display: flex;
+  align-items: center;
+  overflow-x: auto;
+  white-space: nowrap;
+  background: #f8f9fa;
+  padding: 10px;
+  border-top: 1px solid #ddd;
+  font-family: 'Segoe UI', sans-serif;
+  scrollbar-width: none;
+}
+.page-section::-webkit-scrollbar {
+  display: none;
+}
+.page-section a {
+  color: #333;
+  text-decoration: none;
+  padding: 10px 20px;
+  margin: 5px 10px;
+  background-color: white;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  transition: all 0.3s ease;
+  font-weight: 500;
+  display: inline-block;
+}
+.page-section a:hover {
+  background-color: #3498db;
+  color: white;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+  transform: translateY(-2px);
+}
+@media screen and (min-width: 769px) {
+  .page-section {
+    margin-left: 220px; /* Sidebar er width er por theke start hobe */
+  }
+}
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: 'Poppins', sans-serif;
+  background: linear-gradient(to right, #f0f8ff, #e0f7fa);
+}
+
+.hero-container {
+  position: relative;
+  width: 100%;
+  height: 300px;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-left: 0px;
+}
+
+.hero-slider {
+  display: flex;
+  transition: transform 1s ease-in-out;
+  width: 300%;
+}
+
+.hero-slide {
+  min-width: 100%;
+  height: 300px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  padding: 20px;
+  background-size: cover;
+  background-position: center;
+}
+
+.hero-slide:nth-child(1) {
+  background: linear-gradient(to right, #00bcd4, #009688);
+}
+.hero-slide:nth-child(2) {
+  background: linear-gradient(to right, #4caf50, #388e3c);
+}
+.hero-slide:nth-child(3) {
+  background: linear-gradient(to right, #ff9800, #f57c00);
+}
+
+.hero-slide h2 {
+  color: white;
+  font-size: 2rem;
+  margin-bottom: 15px;
+  animation: fadeIn 0.8s ease-in-out;
+}
+
+.hero-slide a {
+  padding: 10px 20px;
+  background: white;
+  color: #333;
+  text-decoration: none;
+  font-weight: bold;
+  border-radius: 5px;
+  transition: 0.3s ease;
+}
+
+.hero-slide a:hover {
+  background: #333;
+  color: white;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateX(-30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0px);
+  }
+}
+
+/* Visitor counter */
+.visitor-counter {
+  position: absolute;
+  bottom: 15px;
+  right: 20px;
+  background: rgba(255, 255, 255, 0.9);
+  padding: 6px 12px;
+  border-radius: 20px;
+  font-size: 14px;
+  font-weight: bold;
+  color: #333;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.2);
+}
+
+/* ========== Responsive ========== */
+@media (max-width: 768px) {
+  .hero-container {
+    height: 260px;
+  }
+
+  .hero-slide h2 {
+    font-size: 1.5rem;
+  }
+
+  .hero-slide a {
+    font-size: 0.95rem;
+    padding: 8px 16px;
+  }
+
+  .visitor-counter {
+    font-size: 12px;
+    padding: 5px 10px;
+    right: 10px;
+    bottom: 10px;
+  }
+}
+
+@media (max-width: 480px) {
+  .hero-container {
+    height: 230px;
+  }
+
+  .hero-slide h2 {
+    font-size: 1.2rem;
+  }
+
+  .hero-slide a {
+    font-size: 0.9rem;
+  }
+}
+.post-section {
+    padding: 20px;
+    max-width: 1200px;
+      margin-left: 220px;
+  padding: 20px;
+  }
+    @media (max-width: 768px) {
+    .post-section {
+      margin-left: 0;
+    }
+  }
+
+  .section-title {
+    font-size: 24px;
+    font-weight: bold;
+    margin-bottom: 15px;
+    text-align: center;
+  }
+
+  .card-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 16px;
+  }
+
+  @media (max-width: 768px) {
+    .card-grid {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+
+  @media (max-width: 480px) {
+    .card-grid {
+      grid-template-columns: repeat(1, 1fr);
+    }
+  }
+
+  .post-card {
+    background: #fff;
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+    transition: transform 0.3s, box-shadow 0.3s;
+    display: block;
+    text-decoration: none;
+  }
+
+  .post-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+  }
+.post-thumb {
+  width: 100%;
+  height: auto;
+  aspect-ratio: 16 / 9;
+  object-fit: cover;
+  display: block;
+  background-color: #eee;
+}
+
+  .post-content {
+    padding: 12px;
+  }
+
+  .post-title {
+    font-size: 16px;
+    font-weight: 600;
+    margin-bottom: 6px;
+    color: #222;
+  }
+
+  .post-date {
+    font-size: 12px;
+    color: #666;
+  }
+
+
+
+  </style>
+
+</head>
+<body>
+ <div class="animated-header">
+  <div class="logo-animated">BookZoneBD</div>
+  <form class="search-box" action="/search" method="get">
+    <input type="text" name="q" placeholder="Search Guide Books..." />
+    <button type="submit">Search</button>
+  </form>
+  <!-- Toggle Button (Mobile) -->
+<button class="sidebar-toggle-btn" onclick="document.querySelector('.abswer-sidebar').classList.toggle('active')">
+  ☰ Menu
+</button>
+
+<!-- Sidebar Menu -->
+<div class="abswer-sidebar">
+   <a href="/">🏠 Home</a>
+  <a href="/p/about-us.html">📄 About</a>
+  <a href="/p/contact-us.html">✉️ Contact</a>
+  <a href="/p/privacy-policy.html">🔐 Privacy Policy</a>
+  <a href="/search/label/All%20Books">📚 All Books</a>
+</div>
+<!-- ✅ END SIDEBAR -->
+
+</div>
+<div class="page-section">
+      <a href="/search/label/Class%206">📘 Class 6</a>
+  <a href="/search/label/Class%207">📗 Class 7</a>
+  <a href="/search/label/Class%208">📙 Class 8</a>
+  <a href="/search/label/Class%209">📕 Class 9</a>
+  <a href="/search/label/Class%2010">📔 Class 10</a>
+  <a href="/search/label/Model%20Test">📝 Model Test</a>
+  <a href="/search/label/Board%20Questions">📄 Board Questions</a>
+  <a href="/search/label/Suggestion">💡 Suggestions</a>
+  <a href="/">🏠 Home</a>
+  <a href="/p/about-us.html">📄 About</a>
+  <a href="/p/contact-us.html">✉️ Contact</a>
+  <a href="/p/privacy-policy.html">🔐 Privacy Policy</a>
+  <a href="/search/label/All%20Books">📚 All Books</a>
+</div>
+<div class="hero-container">
+  <div class="hero-slider" id="heroSlider">
+    <div class="hero-slide">
+      <h2>আমাদের সাইটে ২০২৫ সালের সকল গাইড পাওয়া যাচ্ছে</h2>
+      <a href="/search/label/All%20Books">সব গাইড দেখুন</a>
+    </div>
+    <div class="hero-slide">
+      <h2>সকল বোর্ড প্রশ্ন ও সাজেশন এক জায়গায়!</h2>
+      <a href="/search/label/Board%20Questions">বোর্ড প্রশ্ন</a>
+    </div>
+    <div class="hero-slide">
+      <h2>নতুন আপডেট পেতে এখনই ফলো করুন</h2>
+      <a href="/p/contact-us.html">যোগাযোগ করুন</a>
+    </div>
+  </div>
+
+  <div class="visitor-counter" id="visitorCounter">👥 Daily Visitors: Loading...</div>
+</div>
+<!-- ✨ Latest Posts Section for HOME PAGE -->
+<section class="post-section">
+  <div class="section-title">📚 Latest Uploads (Last 20 Days)</div>
+  <div id="post-cards" class="card-grid"></div>
+</section>
+
+
+
+    <script>
+ const slider = document.getElementById('heroSlider');
+  let index = 0;
+  const totalSlides = 3;
+
+  function showNextSlide() {
+    index = (index + 1) % totalSlides;
+    slider.style.transform = `translateX(-${index * 100}%)`;
+  }
+
+  setInterval(showNextSlide, 3500);
+
+  // Fake visitor count (replace with real logic later)
+  function loadVisitorCount() {
+    // You can replace this part with real counter logic later
+    const count = Math.floor(Math.random() * 500 + 200);
+    document.getElementById('visitorCounter').innerText = `👥 Daily Visitors: ${count}`;
+  }
+
+  loadVisitorCount();
+    const blogURL = 'https://bookzonebd.blogspot.com';
+
+  fetch(`${blogURL}/feeds/posts/default?alt=json&max-results=20`)
+    .then(res => {
+      if (!res.ok) throw new Error('Network response was not ok');
+      return res.json();
+    })
+    .then(data => {
+      console.log('Fetched Blog Data:', data); // For debugging
+      const entries = data.feed?.entry || [];
+      const container = document.getElementById('post-cards');
+
+      if (entries.length === 0) {
+        container.innerHTML = "<p style='text-align:center;'>No posts found.</p>";
+        return;
+      }
+
+      entries.forEach(entry => {
+        const title = entry.title?.$t || 'No Title';
+        const link = entry.link?.find(l => l.rel === "alternate")?.href || '#';
+        const publishedDate = entry.published?.$t ? new Date(entry.published.$t).toLocaleDateString() : 'Unknown Date';
+let mediaThumbnail = entry.media$thumbnail?.url || 'https://via.placeholder.com/400x225.png?text=No+Image';
+// Replace default small thumbnail size with bigger one
+mediaThumbnail = mediaThumbnail.replace(/\/s72\-c/, '/s640');
+
+
+        const card = `
+          <a class="post-card" href="${link}" target="_blank">
+            <img class="post-thumb" src="${mediaThumbnail}" alt="${title}">
+            <div class="post-content">
+              <div class="post-title">${title}</div>
+              <div class="post-date">📅 ${publishedDate}</div>
+            </div>
+          </a>
+        `;
+
+        container.innerHTML += card;
+      });
+    })
+    .catch(err => {
+      console.error('Failed to load posts:', err);
+      document.getElementById('post-cards').innerHTML = "<p style='text-align:center;'>Failed to load posts.</p>";
+    });
+    </script>
+</body>
+</html>
+
+
+
+
